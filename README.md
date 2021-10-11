@@ -1,2 +1,4 @@
 # wait4localstack
-Python script for ensuring that localstack has fully started.
+A Python package for ensuring that localstack has fully started.
+
+

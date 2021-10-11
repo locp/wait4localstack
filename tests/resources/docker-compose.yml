@@ -1,0 +1,9 @@
+---
+version: "3"
+
+services:
+  sut:
+    build: sut
+    container_name: 'sut'
+    volumes:
+      - "../../dist:/tmp/dist"
