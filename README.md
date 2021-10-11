@@ -4,7 +4,7 @@ A Python package for ensuring that localstack has fully started.
 ## Application Programming Interface (API) Documentation
 
 To see the documentation for the API (auto-generated) please see
-https://github.com/locp/wait4localstack/docs/index.md
+https://github.com/locp/wait4localstack/blob/main/docs/index.md
 
 ## Command Line Interface (CLI) Interface
 
