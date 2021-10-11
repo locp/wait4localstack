@@ -7,14 +7,9 @@ check that the status of all services are "running".
 
 Notes
 -----
-The service health checks for Localstack are described in detail on in the
-Localstack documentation[1].
-
-References
-----------
-.. [1] Localstack: Service health checks,
-   available at <https://github.com/localstack/localstack#service-health-checks>,
-   accessed October 10th, 2021.
+The service health checks for Localstack are described in detail in the
+Localstack documentation see
+https://github.com/localstack/localstack#service-health-checks
 
 Examples
 --------
