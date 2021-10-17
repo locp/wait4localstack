@@ -26,6 +26,8 @@ import sys
 import time
 import urllib3
 
+__version__ = '0.2.0'
+
 
 class Wait4Localstack:
     """A class for waiting for Localstack to be ready."""

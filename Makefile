@@ -5,7 +5,7 @@ clean:
 	rm -rf dist/ tests/resources/sut/wait4localstack-*.tar.gz
 
 build:
-	python3 -m build
+	PYTHONPATH=. python3 -m build
 	PYTHONPATH=. sphinx-build -b markdown . docs
 	cp dist/wait4localstack-*.tar.gz tests/resources/sut/
 	docker-compose -f tests/resources/docker-compose.yml build

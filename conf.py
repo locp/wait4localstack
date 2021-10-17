@@ -12,19 +12,16 @@ https://www.sphinx-doc.org/en/master/usage/configuration.html
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-from distutils.dist import Distribution
-dist = Distribution()
-dist.parse_config_files()
-metadata = dist.get_option_dict('metadata')
 
 # -- Project information -----------------------------------------------------
+import wait4localstack
 
-project = list(metadata['name'])[1]
+project = 'wait4localstack'
 copyright = '2020, League of Crafty Programmers Ltd.'
-author = list(metadata['author'])[1]
+author = 'League of Crafty Programmers Ltd.'
 
 # The full version, including alpha/beta/rc tags
-release = list(metadata['version'])[1]
+release = wait4localstack.__version__
 
 
 # -- General configuration ---------------------------------------------------
