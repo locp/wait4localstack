@@ -1,3 +1,5 @@
+MODULE_VERSION := $(shell cat wait4localstack/VERSION )
+
 all: build test
 
 clean:
@@ -12,7 +14,10 @@ build:
 
 publish:
 	python3 -m twine upload dist/*
+	docker push locp/wait4localstack:$(MODULE_VERSION)
+	docker push locp/wait4localstack:latest
 
 test:
-	docker-compose -f tests/resources/docker-compose.yml up -d
+	@echo $(MODULE_VERSION)
+	DOCKER_IMAGE_TAG=$(MODULE_VERSION) docker-compose -f tests/resources/docker-compose.yml up -d
 	PYTHONPATH=.:.. pytest

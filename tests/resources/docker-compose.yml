@@ -5,5 +5,7 @@ services:
   sut:
     build: sut
     container_name: 'sut'
+    entrypoint: sleep infinity
+    image: "locp/wait4localstack:${DOCKER_IMAGE_TAG-latest}"
     volumes:
       - "../../dist:/tmp/dist"

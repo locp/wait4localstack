@@ -1,6 +1,6 @@
 FROM python:3-alpine
 
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 COPY wait4localstack-*.tar.gz /tmp
-RUN ls -l /tmp \
-    && pip install /tmp/wait4localstack-*.tar.gz
-CMD ["sleep", "infinity"]
+RUN pip install /tmp/wait4localstack-*.tar.gz
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
