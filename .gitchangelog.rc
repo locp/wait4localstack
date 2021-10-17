@@ -157,13 +157,12 @@ tag_filter_regexp = r'^[0-9]+\.[0-9]+(\.[0-9]+)?$'
 ##
 ## This label will be used as the changelog Title of the last set of changes
 ## between last valid tag and HEAD if any.
-from distutils.dist import Distribution
-dist = Distribution()
-dist.parse_config_files()
-unreleased_version_label = dist.get_option_dict('metadata')
-unreleased_version_label = unreleased_version_label['version']
-_, unreleased_version_label = unreleased_version_label
+import os
 
+with open(os.path.join('wait4localstack', 'VERSION')) as version_file:
+    version = version_file.read().strip()
+
+unreleased_version_label = version
 
 ## ``output_engine`` is a callable
 ##

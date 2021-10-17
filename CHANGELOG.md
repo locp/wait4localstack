@@ -1,7 +1,18 @@
 # Changelog
 
 
-## 0.1.1
+## 0.2.0
+
+### New
+
+* Publish a Docker image with the module installed. [Ben Dalling]
+
+### Changes
+
+* Migrate setuptools from statuc to dynamic configuration. [Ben Dalling]
+
+
+## 0.1.1 (2021-10-12)
 
 ### New
 
