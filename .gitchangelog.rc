@@ -157,12 +157,37 @@ tag_filter_regexp = r'^[0-9]+\.[0-9]+(\.[0-9]+)?$'
 ##
 ## This label will be used as the changelog Title of the last set of changes
 ## between last valid tag and HEAD if any.
+import json
+import logging
 import os
+import sys
+import urllib3
 
+logger = logging.getLogger('gitchangelog')
 with open(os.path.join('wait4localstack', 'VERSION')) as version_file:
     version = version_file.read().strip()
 
 unreleased_version_label = version
+repo_tags = []
+
+if 'GITHUB_EVENT_NAME' in os.environ:
+    github_event_name = os.environ['GITHUB_EVENT_NAME']
+else:
+    github_event_name = None
+
+if github_event_name == 'pull_request':
+    http = urllib3.PoolManager()
+    r = http.request('GET', 'https://api.github.com/repos/locp/wait4localstack/tags')
+    data = json.loads(r.data)
+
+    for tag in data:
+        repo_tags.append(tag['name'])
+
+    print(f'Checking if {version} is in {repo_tags}.', file=sys.stderr)
+
+    if version in repo_tags:
+        logger.error(f'The tag {version} already exists.')
+        sys.exit(1)
 
 ## ``output_engine`` is a callable
 ##
