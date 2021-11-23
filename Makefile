@@ -9,11 +9,14 @@ clean:
 build:
 	PYTHONPATH=. python3 -m build
 	PYTHONPATH=. sphinx-build -b markdown . docs
+	gitchangelog > CHANGELOG.md
 	cp dist/wait4localstack-*.tar.gz tests/resources/sut/
-	docker-compose -f tests/resources/docker-compose.yml build
+	docker-compose -f tests/resources/docker-compose.yml build sut
 
-publish:
-	python3 -m twine upload dist/*
+push:
+	docker-compose -f tests/resources/docker-compose.yml build sut
+	DOCKER_IMAGE_TAG=$(MODULE_VERSION) docker-compose -f tests/resources/docker-compose.yml build sut
+	docker images
 	docker push locp/wait4localstack:$(MODULE_VERSION)
 	docker push locp/wait4localstack:latest
 

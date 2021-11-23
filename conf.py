@@ -14,14 +14,13 @@ https://www.sphinx-doc.org/en/master/usage/configuration.html
 #
 
 # -- Project information -----------------------------------------------------
-import wait4localstack
-
 project = 'wait4localstack'
 copyright = '2020, League of Crafty Programmers Ltd.'
 author = 'League of Crafty Programmers Ltd.'
 
 # The full version, including alpha/beta/rc tags
-release = wait4localstack.__version__
+with open('wait4localstack/VERSION') as stream:
+    release = stream.read().strip()
 
 
 # -- General configuration ---------------------------------------------------
