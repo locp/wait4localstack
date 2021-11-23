@@ -34,6 +34,6 @@ jobs:
 
       - name: Create Tag
         run: |
-          git tag $( cat redmx/VERSION )
+          git tag $( cat wait4localstack/VERSION )
           git push --tags
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
