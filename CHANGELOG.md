@@ -1,7 +1,7 @@
 # Changelog
 
 
-## 0.2.1
+## 0.2.2
 
 ### New
 
@@ -12,6 +12,8 @@
 * Add example and documents. [Ben Dalling]
 
 ### Fix
+
+* Correct path to version file. [Ben Dalling]
 
 * Ensure we get the right status after 0.13.0. [Ben Dalling]
 
