@@ -1,6 +1,21 @@
 # Changelog
 
 
+## 0.2.1
+
+### New
+
+* Add CI/CD with GitHub actions. [Ben Dalling]
+
+### Changes
+
+* Add example and documents. [Ben Dalling]
+
+### Fix
+
+* Ensure we get the right status after 0.13.0. [Ben Dalling]
+
+
 ## 0.2.0 (2021-10-17)
 
 ### New
