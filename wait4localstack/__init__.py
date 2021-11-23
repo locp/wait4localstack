@@ -26,8 +26,6 @@ import sys
 import time
 import urllib3
 
-__version__ = '0.2.0'
-
 
 class Wait4Localstack:
     """A class for waiting for Localstack to be ready."""
@@ -223,7 +221,7 @@ class Wait4Localstack:
                 for service_name in service_names:
                     status = services[service_name]
 
-                    if status == 'running':
+                    if status == 'running' or status == 'available':
                         logger.info(f'Service {service_name} is {status}.')
                     else:
                         connected = False
