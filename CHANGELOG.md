@@ -5,6 +5,8 @@
 
 ### Fix
 
+* Automate version test check. [Ben Dalling]
+
 * Pin GitHub workflows to supported Python versions. [Ben Dalling]
 
 
