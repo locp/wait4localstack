@@ -1,7 +1,14 @@
 # Changelog
 
 
-## 0.2.3
+## 0.2.4
+
+### Fix
+
+* Pin GitHub workflows to supported Python versions. [Ben Dalling]
+
+
+## 0.2.3 (2021-12-18)
 
 ### New
 
