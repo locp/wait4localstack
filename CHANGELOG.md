@@ -1,7 +1,18 @@
 # Changelog
 
 
-## 0.2.2
+## 0.2.3
+
+### New
+
+* Add Docker Compose example. [Ben Dalling]
+
+### Fix
+
+* Stop duplicated log messages. [Ben Dalling]
+
+
+## 0.2.2 (2021-11-23)
 
 ### New
 
