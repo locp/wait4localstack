@@ -25,9 +25,9 @@ Feature: Wait4Localstack
     And resource is <resource_name>
     Then expect package response to match <package_response>
     Examples:
-      | testinfra_package | resource_name                          | package_response |
-      | file.exists       | /tmp/dist/wait4localstack-0.2.3.tar.gz | True             |
-      | file.exists       | /usr/local/bin/entrypoint.sh           | True             |
-      | file.exists       | /usr/local/bin/wait4localstack         | True             |
-      | host.run          | /usr/local/bin/wait4localstack -h      | 0                |
-      | pip.is_installed  | wait4localstack                        | True             |
+      | testinfra_package | resource_name                             | package_response |
+      | file.exists       | /tmp/dist/wait4localstack-$VERSION.tar.gz | True             |
+      | file.exists       | /usr/local/bin/entrypoint.sh              | True             |
+      | file.exists       | /usr/local/bin/wait4localstack            | True             |
+      | host.run          | /usr/local/bin/wait4localstack -h         | 0                |
+      | pip.is_installed  | wait4localstack                           | True             |

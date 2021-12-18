@@ -1,6 +1,7 @@
 """Wait4Localstack feature tests."""
 import testinfra
 
+from string import Template
 from wait4localstack import Wait4Localstack
 from wait4localstack import command_line_interface
 
@@ -82,6 +83,11 @@ def package_is_testinfra_package(testinfra_package, testinfra_fixture):
 @when('resource is <resource_name>')
 def resource_is_resource_name(resource_name, testinfra_fixture):
     """resource is <resource_name>."""
+    with open('wait4localstack/VERSION') as stream:
+        version = stream.read().strip()
+
+    t = Template(resource_name)
+    resource_name = t.substitute(VERSION=version)
     testinfra_fixture['resource_name'] = resource_name
 
 
