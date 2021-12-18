@@ -55,10 +55,8 @@ class Wait4Localstack:
         self._logger = None
         self._maximum_retries = None
         self._test_interval = None
-        logging.basicConfig()
+        logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         logger = logging.getLogger('wait4localstack')
-        handler = logging.StreamHandler()
-        logger.addHandler(handler)
         logger.setLevel(log_level)
         self.logger(logger)
         self.exponential_backoff(exponential_backoff)
@@ -236,6 +234,8 @@ class Wait4Localstack:
                 logger.debug(f'Will retry in {sleep_time} seconds.')
                 attempts += 1
                 time.sleep(sleep_time)
+
+        logger.info(f'The following service(s) are {status} {",".join(service_names)}.')
 
 
 def command_line_interface(args):
