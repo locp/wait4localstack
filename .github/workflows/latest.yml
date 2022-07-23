@@ -20,7 +20,10 @@ jobs:
           python-version: 3.x
 
       - name: Requirements
-        run: pip install -r tests/resources/requirements-latest.txt
+        run: |
+          python -m pip install --upgrade pip
+          pip install -qr tests/resources/requirements-latest.txt
+          pip freeze
 
       - name: Build
         run: echo $GITHUB_EVENT_NAME && make build
