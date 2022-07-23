@@ -7,6 +7,7 @@ clean:
 	rm -rf dist/ tests/resources/sut/wait4localstack-*.tar.gz
 
 build:
+	cut -d= -f1 requirements.txt > tests/resources/requirements-latest.txt
 	PYTHONPATH=. python3 -m build
 	PYTHONPATH=. sphinx-build -b markdown . docs
 	gitchangelog > CHANGELOG.md
