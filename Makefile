@@ -1,6 +1,6 @@
 MODULE_VERSION := $(shell cat wait4localstack/VERSION )
 
-all: build test
+all: lint build test
 
 clean:
 	docker-compose -f tests/resources/docker-compose.yml down -t 0
@@ -13,6 +13,10 @@ build:
 	gitchangelog > CHANGELOG.md
 	cp dist/wait4localstack-*.tar.gz tests/resources/sut/
 	docker-compose -f tests/resources/docker-compose.yml build sut
+
+lint:
+	bandit -r .
+	flake8
 
 push:
 	docker-compose -f tests/resources/docker-compose.yml build sut
