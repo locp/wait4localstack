@@ -134,3 +134,5 @@ dmypy.json
 
 # Visual Code Studio
 .vscode/
+
+tests/resources/volume/

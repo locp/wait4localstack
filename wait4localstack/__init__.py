@@ -20,11 +20,11 @@ To run with defaults simply have:
 >>> wait4localstack.wait_for_all_services()
 """
 import argparse
-import json
 import logging
 import sys
 import time
-import urllib3
+
+import wait4localstack.localstack
 
 
 class Wait4Localstack:
@@ -186,56 +186,23 @@ class Wait4Localstack:
         """Check the health endpoint until it is successful or max attempts has been reached."""
         logger = self.logger()
         connected = False
-        http = urllib3.PoolManager()
         attempts = 0
         max_retries = self.maximum_retries()
 
-        if max_retries:
-            logger.debug(f'Max retries is set to {max_retries}')
-
         while not connected:
+            localstack = wait4localstack.localstack.LocalStack(self.localstack_endpoint(), logger)
+            connected = localstack.is_live()
+
             if max_retries and attempts >= max_retries:
                 logger.error(f'Localstack is not ready after {max_retries} attempts.')
                 sys.exit(1)
 
             sleep_time = self.test_interval()
 
-            try:
-                r = http.request('GET', self.localstack_endpoint())
-
-                if r.status != 200:
-                    logger.warning(f'Unexpected status ({r.status}) from {self.localstack_endpoint()}.')
-                    continue
-
-                services = json.loads(r.data)['services']
-                service_names = services.keys()
-
-                if len(service_names) == 0:
-                    logger.warning(f'No running services on {self.localstack_endpoint()}')
-                    continue
-
-                connected = True
-
-                for service_name in service_names:
-                    status = services[service_name]
-
-                    if status == 'running' or status == 'available':
-                        logger.info(f'Service {service_name} is {status}.')
-                    else:
-                        connected = False
-                        logger.warning(f'Service {service_name} is {status}.')
-
-            except urllib3.exceptions.MaxRetryError as e:
-                logger.warning(e.reason)
-            except KeyError as e:
-                logger.warning(e.args)
-
             if not connected:
                 logger.debug(f'Will retry in {sleep_time} seconds.')
                 attempts += 1
                 time.sleep(sleep_time)
-
-        logger.info(f'The following service(s) are {status} {",".join(service_names)}.')
 
 
 def command_line_interface(args):
