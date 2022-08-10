@@ -41,6 +41,7 @@ pytest
 pytest-bdd
 pytest-cov
 pytest-flake8
+pytest-testinfra
 pytz
 PyYAML
 requests
@@ -56,6 +57,7 @@ sphinxcontrib-jsmath
 sphinxcontrib-qthelp
 sphinxcontrib-serializinghtml
 stevedore
+testinfra-bdd
 tomli
 unify
 untokenize
