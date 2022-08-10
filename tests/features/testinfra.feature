@@ -13,8 +13,13 @@ Feature: TestInfra
         When the pip package is wait4localstack
         Then the pip package is present
         And the pip check is OK
-    
+
     Scenario: Check Wait4Localstack Command
         Given the host with URL "docker://sut" is ready
         When the command is "/usr/local/bin/wait4localstack -h"
         Then the command return code is 0
+
+    Scenario: Wait4Localstack
+        Given Wait4Localstack
+        And the host with URL "docker://localstack_main" is ready
+        Then the command "awslocal" exists in path
