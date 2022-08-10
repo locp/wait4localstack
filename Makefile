@@ -1,17 +1,22 @@
 MODULE_VERSION := $(shell cat wait4localstack/VERSION )
 
-all: build test
+all: lint build test
 
 clean:
 	docker-compose -f tests/resources/docker-compose.yml down -t 0
 	rm -rf dist/ tests/resources/sut/wait4localstack-*.tar.gz
 
 build:
+	cut -d= -f1 requirements.txt > tests/resources/requirements-latest.txt
 	PYTHONPATH=. python3 -m build
 	PYTHONPATH=. sphinx-build -b markdown . docs
 	gitchangelog > CHANGELOG.md
 	cp dist/wait4localstack-*.tar.gz tests/resources/sut/
 	docker-compose -f tests/resources/docker-compose.yml build sut
+
+lint:
+	bandit -r .
+	flake8
 
 push:
 	docker-compose -f tests/resources/docker-compose.yml build sut

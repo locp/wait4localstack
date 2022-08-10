@@ -29,7 +29,7 @@ To run with defaults simply have:
 ```
 
 
-### class wait4localstack.Wait4Localstack(localstack_endpoint='http://localhost:4566/health', maximum_retries=0, test_interval=2, exponential_backoff=False, log_level='WARN')
+### _class_ wait4localstack.Wait4Localstack(localstack_endpoint='http://localhost:4566/health', maximum_retries=0, test_interval=2, exponential_backoff=False, log_level='WARN')
 A class for waiting for Localstack to be ready.
 
 
@@ -181,10 +181,10 @@ consumes a Wait4Localstack object.
 # Indices and tables
 
 
-* Index
+* [Index](genindex.md)
 
 
-* Module Index
+* [Module Index](py-modindex.md)
 
 
-* Search Page
+* [Search Page](search.md)

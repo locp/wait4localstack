@@ -1,7 +1,24 @@
 # Changelog
 
 
-## 0.2.4
+## 1.0.0
+
+### New
+
+* Regularly test against latest Python packages. [Ben Dalling]
+
+### Changes
+
+* Migrate to testinfra-bdd. [Ben Dalling]
+
+### Fix
+
+* Increase test coverage. [Ben Dalling]
+
+* Add Radon analysis to the project. [Ben Dalling]
+
+
+## 0.2.4 (2021-12-18)
 
 ### Fix
 
