@@ -25,7 +25,7 @@ def wait4localstack_object():
 def method_is_called_with_method_arguments(method, method_arguments, wait4localstack_fixture):
     """<method> is called with <method_arguments>."""
     wait4localstack_fixture['method'] = method
-    widget = Wait4Localstack()
+    widget = Wait4Localstack(maximum_retries=1)
 
     if method == 'exponential_backoff':
         b = (method_arguments == 'True')

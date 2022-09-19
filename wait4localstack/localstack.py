@@ -25,11 +25,7 @@ class LocalStack:
         self.service_names = []
         self.services = {}
         data = self.get_connection_details()
-
-        if data:
-            self.live = True
-        else:
-            self.live = False
+        self.parse_services(data)
 
     def get_connection_details(self):
         """
@@ -40,7 +36,7 @@ class LocalStack:
         dict
             The connection string having being parsed as JSON.
         """
-        data = None
+        data = {}
         logger = self.logger()
         http = urllib3.PoolManager()
 
@@ -49,7 +45,9 @@ class LocalStack:
             r = http.request('GET', self.connection_url)
 
             if r.status == 200:
+                logger.debug(f'Response is "{r.data}".')
                 data = json.loads(r.data)
+                logger.debug(f'Data is "{data}".')
             else:
                 logger.warning(f'Unexpected status ({r.status}) from {self.connection_url}.')
         except urllib3.exceptions.MaxRetryError as e:
@@ -66,19 +64,20 @@ class LocalStack:
         bool
             True if all services are available, False otherwise.
         """
-        response = True
-        logger = self.logger
+        live_services_count = 0
+        services_count = len(self.service_names)
+        logger = self.logger()
 
         for service_name in self.service_names:
             service = self.services[service_name]
 
             if service.is_available():
                 logger.info(f'Service {service_name} is available/running.')
+                live_services_count += 1
             else:
-                response = False
                 logger.error(f'Service {service_name} status is {service.status}.')
 
-        return response
+        return (services_count and live_services_count == services_count)
 
     def logger(self, logger=None):
         """
@@ -107,14 +106,18 @@ class LocalStack:
         data : dict
             The data (parsed from JSON text).
         """
-        logger = self.logger
+        logger = self.logger()
+        self.service_names = []
+        self.services = {}
+
         try:
-            services = data['service']
+            services = data['services']
 
             for service_name in services:
                 service_status = services[service_name]
+                logger.debug(f'Status of {service_name} is {service_status}.')
                 service = wait4localstack.service.Service(name, service_status)
                 self.service_names.append(service_name)
                 self.services[service_name] = service
-        except KeyError as ex:
-            logger.error(f'Unable to parse health endpoint response ({str(ex)}).')
+        except KeyError:
+            logger.error(f'Unable to parse health endpoint response ("{json.dumps(data)}").')

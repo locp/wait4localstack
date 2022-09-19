@@ -1,7 +1,14 @@
 # Changelog
 
 
-## 1.0.0
+## 1.0.1
+
+### Fix
+
+* Avoid false positive when no services are available. [Ben Dalling]
+
+
+## 1.0.0 (2022-08-11)
 
 ### New
 
